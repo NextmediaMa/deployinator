@@ -231,8 +231,9 @@ module Deployinator
           raise AmbiguousRemoteBranchesError.new(output, branch),
             "More than one ref exists remotely matching #{branch}"
         end
-
-        lines.first.strip[0, Deployinator.git_sha_length.to_i]
+        if lines.count == 1
+          lines.first.strip[0, Deployinator.git_sha_length.to_i]
+        end
       end
 
       # Public: helper method which wraps git clone
